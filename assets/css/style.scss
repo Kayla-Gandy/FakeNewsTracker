@@ -1,0 +1,21 @@
+---
+---
+
+@import "";
+
+.articles {
+	display: flex;
+	flex-wrap: wrap;
+	
+}
+
+.news {
+	width: 300px;
+	margin: 5px;
+	padding: 10px;
+	border: 1px solid lightgrey;
+}
+
+img {
+	max-width: 300px;
+}
