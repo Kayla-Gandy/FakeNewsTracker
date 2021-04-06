@@ -40,25 +40,55 @@
         </div>
         
         <h1>Top Headlines</h1>
-        <div class="articles">
-          <script>
-          const key = "49e7526290614458a640c5a3f23e9df0"
-          const url = `https://newsapi.org/v2/top-headlines?country=us&language=en&page=2&apiKey=${key}`
-          const recievedNews = (newsdata) => {
-            const articlesDiv = document.querySelector(".articles")
-            newsdata.articles.forEach((article) => {
-            const div = document.createElement("div")
-              div.className = "news"
-              div.innerHTML = `
-			        <h2>${article.title}</h2>
-			        <img src="${article.urlToImage}"/>`
-              articlesDiv.appendChild(div)
-            })
-          }
-          fetch(url)
-            .then(response => response.json())
-            .then(recievedNews)  
-          </script>
+	<input type="text" id="input" placeholder='Type "cnn", "techcrunch", "espn", "buzzfeed", or "mashable" and hit enter to load news' autofocus/>
+	<div id="container">
+        <script>
+		var input = document.getElementById('input');
+		var container = document.getElementById('container');
+		function getNews(event) {	
+			if (event.keyCode == 13) {
+				var xhr = $.get("https://newsapi.org/v1/articles?source=" + input.value + "&apiKey=612c24355bc24dbcbb4b13496d772971");
+				xhr.done(function(data) {
+					for (var i = 0; i < 9; i++) {
+						var articleImageHeight = Math.floor(Math.random() * 250) + 150;
+						var articleContainer = document.createElement('DIV');
+						var articleImageContainer = document.createElement('DIV');
+						var articleImage = document.createElement('DIV');
+						var articleTitle = document.createElement('a');
+						var articleAuthor = document.createElement('p');
+						var articleDescription = document.createElement('p');
+						articleContainer.classList.add('article-container');
+						articleImageContainer.classList.add('article-image-container');
+						articleImageContainer.style.height = articleImageHeight + 'px';
+						articleImage.classList.add('article-image');
+						articleTitle.classList.add('article-title');
+						articleAuthor.classList.add('article-author');
+						articleDescription.classList.add('article-description');
+						container.appendChild(articleContainer);
+						articleContainer.appendChild(articleImageContainer);
+						articleImageContainer.appendChild(articleImage);
+						articleContainer.appendChild(articleTitle);
+						articleContainer.appendChild(articleAuthor);
+						articleContainer.appendChild(articleDescription);
+						articleTitle.innerHTML = data.articles[i].title;
+						articleTitle.setAttribute('href', data.articles[i].url);
+						articleTitle.setAttribute('target', '_blank');	
+						if (data.articles[i].author != "null") {
+							articleAuthor.innerHTML = data.articles[i].author;
+						}
+						articleImage.style.background = "url(" + data.articles[i].urlToImage + ") center center no-repeat";
+						articleImage.style.backgroundSize = "cover";
+						articleDescription.innerHTML = data.articles[i].description;
+					}
+				});
+				input.value = "";
+				while (container.firstChild) {
+					container.removeChild(container.firstChild);
+				}
+			}
+		}
+		input.addEventListener('keyup', getNews);
+        </script>
         </div>
 
         {{ content }}
