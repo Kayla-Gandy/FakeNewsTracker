@@ -47,7 +47,7 @@
 		var container = document.getElementById('container');
 		function getNews(event) {	
 			if (event.keyCode == 13) {
-				var xhr = $.get("https://newsapi.org/v1/articles?source=" + input.value + "&apiKey=612c24355bc24dbcbb4b13496d772971");
+				var xhr = $.get("https://newsapi.org/v1/articles?source=" + input.value + "&language=en&apiKey=49e7526290614458a640c5a3f23e9df0");
 				xhr.done(function(data) {
 					for (var i = 0; i < 9; i++) {
 						var articleImageHeight = Math.floor(Math.random() * 250) + 150;
