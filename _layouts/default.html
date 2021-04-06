@@ -42,8 +42,8 @@
         <h1>Top Headlines</h1>
         <div class="articles">
           <script>
-          const key = "e6ef2cde327f46e3820d0344025b79fc"
-          const url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${key}`
+          const key = "49e7526290614458a640c5a3f23e9df0"
+          const url = `https://newsapi.org/v2/top-headlines?country=us&language=en&page=2&apiKey=${key}`
           const recievedNews = (newsdata) => {
             const articlesDiv = document.querySelector(".articles")
             newsdata.articles.forEach((article) => {
