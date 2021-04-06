@@ -3,11 +3,15 @@
 @import "";
 
 body {
-  background: linear-gradient(to right, rgba(73,155,234,1) 0%, rgba(32,124,229,1) 100%);
+  background-color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
-.contentBox {
-  background-color: #eaeaea;
+.scrolling-box {
+  background-color: #5c5c5c;
   display: block;
   width: 200px;
   height: 200px;
