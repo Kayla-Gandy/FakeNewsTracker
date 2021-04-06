@@ -41,14 +41,14 @@
         
         <h1>Top Headlines</h1>
 	<div class="contentBox">	
-        <ul id="storyList"></ul>
+        <section id="storyList"></section>
         </div>
         <script>
 		var api = "https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty";
 		var apiTopStories = "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty";
-		var contentBox = document.querySelector("contentBox");
+		var contentBox = document.querySelector("#contentBox");
 		var stories = [];
-		var storyList = document.querySelector("storyList");
+		var storyList = document.querySelector("#storyList");
 		var app = {
 			init: () => {app.fetchTopStories();},
 			fetchTopStories: () => {
