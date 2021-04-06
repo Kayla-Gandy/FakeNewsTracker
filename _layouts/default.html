@@ -41,55 +41,48 @@
         
         <h1>Top Headlines</h1>
 	<input type="text" id="input" placeholder='Search news source' autofocus/>
-	<div id="container">
-        <script>
-		var input = document.getElementById('input');
-		var container = document.getElementById('container');
-		function getNews(event) {	
-			if (event.keyCode == 13) {
-				var xhr = $.get("https://newsapi.org/v1/articles?source=" + input.value + "&language=en&apiKey=49e7526290614458a640c5a3f23e9df0");
-				xhr.done(function(data) {
-					for (var i = 0; i < 9; i++) {
-						var articleImageHeight = Math.floor(Math.random() * 250) + 150;
-						var articleContainer = document.createElement('DIV');
-						var articleImageContainer = document.createElement('DIV');
-						var articleImage = document.createElement('DIV');
-						var articleTitle = document.createElement('a');
-						var articleAuthor = document.createElement('p');
-						var articleDescription = document.createElement('p');
-						articleContainer.classList.add('article-container');
-						articleImageContainer.classList.add('article-image-container');
-						articleImageContainer.style.height = articleImageHeight + 'px';
-						articleImage.classList.add('article-image');
-						articleTitle.classList.add('article-title');
-						articleAuthor.classList.add('article-author');
-						articleDescription.classList.add('article-description');
-						container.appendChild(articleContainer);
-						articleContainer.appendChild(articleImageContainer);
-						articleImageContainer.appendChild(articleImage);
-						articleContainer.appendChild(articleTitle);
-						articleContainer.appendChild(articleAuthor);
-						articleContainer.appendChild(articleDescription);
-						articleTitle.innerHTML = data.articles[i].title;
-						articleTitle.setAttribute('href', data.articles[i].url);
-						articleTitle.setAttribute('target', '_blank');	
-						if (data.articles[i].author != "null") {
-							articleAuthor.innerHTML = data.articles[i].author;
-						}
-						articleImage.style.background = "url(" + data.articles[i].urlToImage + ") center center no-repeat";
-						articleImage.style.backgroundSize = "cover";
-						articleDescription.innerHTML = data.articles[i].description;
-					}
-				});
-				input.value = "";
-				while (container.firstChild) {
-					container.removeChild(container.firstChild);
-				}
-			}
-		}
-		input.addEventListener('keyup', getNews);
-        </script>
+	
+	<div id="contentBox">	
+        <ul id="storyList"></ul>
         </div>
+        <script>
+		var api = "https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty";
+		var apiTopStories = "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty";
+		var contentBox = document.querySelector("#contentBox");
+		var stories = [];
+		var storyList = document.querySelector("#storyList");
+		var app = {
+			init: () => {app.fetchTopStories();},
+			fetchTopStories: () => {
+				fetch(apiTopStories).then(response => response.json()).then(data => {
+					var store = data.slice(0,10); // trim to top 10 stories
+					console.log("10 story id", store);
+					store.forEach((item) => {app.fetchOneStory(item);})
+				})
+				setTimeout(app.finish, 2000); // delay 3 sec, then print all stories
+				setTimeout(app.render, 2000);
+			},
+			fetchOneStory: (id) => {
+				var target = "https://hacker-news.firebaseio.com/v0/item/" + id + ".json?print=pretty";
+				fetch(target).then(response => response.json()).then(data => {
+					stories.push({title: data.title, url: data.url});
+				})
+			},
+			render: () => {
+				stories.forEach((story) => {
+					var li = document.createElement("li");
+					var link = document.createElement("a");
+					link.href = story.url;      
+					link.textContent = story.title;
+					link.target= "_blank";
+					li.appendChild(link);
+					storyList.appendChild(li);
+				})
+			},
+			finish: () => {console.log("Top stories", stories);}
+		}
+		app.init();
+        </script>
 
         {{ content }}
 
