@@ -70,16 +70,13 @@
 				stories.forEach((story) => {
 					var li = document.createElement("li");
 					var link = document.createElement("a");
-          				var div1 = document.createElement("div");
-          				var div2 = document.createElement("div");
-          				div2.setAttribute("class", "rate");
-          				div2.innerHTML = '<input type="radio" id="star5" name="rate" value="5" /><label for="star5" title="text">5 stars</label><input type="radio" id="star4" name="rate" value="4" /><label for="star4" title="text">4 stars</label><input type="radio" id="star3" name="rate" value="3" /><label for="star3" title="text">3 stars</label><input type="radio" id="star2" name="rate" value="2" /><label for="star2" title="text">2 stars</label><input type="radio" id="star1" name="rate" value="1" /><label for="star1" title="text">1 star</label>';
+          				var verin = document.createElement("input");
+          				verin.setAttribute("type", "checkbox");
 					link.href = story.url;      
 					link.textContent = story.title;
 					link.target= "_blank";
-					div1.appendChild(link);
-          				li.appendChild(div1);
-          				li.appendChild(div2);
+          				li.appendChild(link);
+          				li.appendChild(verin);
 					storyList.appendChild(li);
 				})
 			},
