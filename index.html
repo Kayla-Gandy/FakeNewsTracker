@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+{% seo %}
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="{{ '/assets/js/respond.js' | relative_url }}"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="{{ '/assets/css/ie.css' | relative_url }}">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="{{ site.github.repository_url }}">View On GitHub</a></li>
+          {% if site.show_downloads %}
+            <li class="downloads"><a href="{{ site.github.zip_url }}">ZIP</a></li>
+            <li class="downloads"><a href="{{ site.github.tar_url }}">TAR</a></li>
+            <li class="title">DOWNLOADS</li>
+          {% endif %}
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Fake News Tracker</h1>
+          <p>Track the validity of news articles and social media posts</p>
+          <hr>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/mattgraham">mattgraham</a></span>
+	<button onclick="location.href='register'" type="button">Register</button>
+        </div>
+        
+        <h1>Top Headlines</h1>
+	<div class="contentBox">	
+        <ul id="storyList"></ul>
+        </div>
+        <script>
+		var api = "https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty";
+		var apiTopStories = "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty";
+		var contentBox = document.querySelector("#contentBox");
+		var stories = [];
+		var storyList = document.querySelector("#storyList");
+		var app = {
+			init: () => {app.fetchTopStories();},
+			fetchTopStories: () => {
+				fetch(apiTopStories).then(response => response.json()).then(data => {
+					var store = data.slice(0,10); // trim to top 10 stories
+					console.log("10 story id", store);
+					store.forEach((item) => {app.fetchOneStory(item);})
+				})
+				setTimeout(app.finish, 2000); // delay 3 sec, then print all stories
+				setTimeout(app.render, 2000);
+			},
+			fetchOneStory: (id) => {
+				var target = "https://hacker-news.firebaseio.com/v0/item/" + id + ".json?print=pretty";
+				fetch(target).then(response => response.json()).then(data => {
+					stories.push({title: data.title, url: data.url});
+				})
+			},
+			render: () => {
+				stories.forEach((story) => {
+					var li = document.createElement("li");
+					var link = document.createElement("a");
+          				var div1 = document.createElement("div");
+          				div1.innerHTML = '<input id="verify" type="checkbox"><label for="verify">Verify Article</label>';
+					link.href = story.url;      
+					link.textContent = story.title;
+					link.target= "_blank";
+          				li.appendChild(link);
+          				li.appendChild(div1);
+					storyList.appendChild(li);
+				})
+			},
+			finish: () => {console.log("Top stories", stories);}
+		}
+		app.init();
+        </script>
+
+        {{ content }}
+
+      </section>
+
+    </div>
+
+  </body>
+</html>
