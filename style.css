@@ -26,13 +26,33 @@ body {
 }     
 
 .contentBox {
-  background-color: #5c5c5c;
+  background-color: #FFEDFC;
   display: block;
   width: 600px;
   height: 200px;
   padding: 1em;
   overflow-y: scroll;
   text-align: left;
+}
+
+a {
+   color: #424042;
+   border-bottom: solid 1px;
+   border-bottom-color: rgba(15,122,252, 0.2);
+   text-decoration: none;
+   padding: 0;
+}
+
+a:hover {
+   color: #cf0000;
+   border-bottom-color: rgba(208,64,0, 0.2);
+   text-decoration: none;
+}
+
+a:visited {
+   color: #800080;
+   border-bottom-color: rgba(128,0,128, 0.2);
+   text-decoration: none;
 }
 
 button {
