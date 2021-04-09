@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik:700&display=swap');
+
 $bg: #fff;
 $text: #382b22;
 $light-pink: #fff0f0;
@@ -14,7 +16,7 @@ $pink-shadow: #ffe3e2;
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Rubik', sans-serif;
   font-size: 1rem;
   line-height: 1.5;
   display: flex;
