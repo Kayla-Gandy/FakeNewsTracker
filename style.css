@@ -59,7 +59,6 @@ a:visited {
 
 button {
   position: relative;
-  display: inline-block;
   cursor: pointer;
   outline: none;
   border: 0;
