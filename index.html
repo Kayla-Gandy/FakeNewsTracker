@@ -54,7 +54,8 @@
 					var li = document.createElement("li");
 					var link = document.createElement("a");
           				var div1 = document.createElement("div");
-          				div1.innerHTML = '<input id="verify" type="checkbox"><label for="verify">Verify Article</label>';
+          				div1.innerHTML = '<label for="verify">Verify Article  <input class="verify" type="file" onclick="return confirm(\'Upload any validating documents\')"></label>';
+					link.setAttribute("onclick", "return confirm(\'This article contains information flagged as false. The Fake News Tracker web extension may hide some content.\');");
 					link.href = story.url;      
 					link.textContent = story.title;
 					link.target= "_blank";
