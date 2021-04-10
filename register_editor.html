@@ -10,7 +10,7 @@
     <script src="{{ '/assets/js/respond.js' | relative_url }}"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     
-    <div class="container">
+ <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card shadow my-5">
@@ -33,24 +33,21 @@
               <small class="form-text text-danger feedback"></small>
             </div>
             <div class="form-group">
+              <label for="text">Designation</label>
+              <input type="email" id="email" name="email" class="form-control border">
+              <small class="form-text text-danger feedback"></small>
+            </div>
+            <div class="form-group">
               <label for="password">Password</label>
               <input type="password" id="password" name="password" class="form-control border" autocomplete="off">
               <small class="form-text text-danger feedback"></small>
             </div>
-            <div class="form-group">
-              <label for="confirmPassword"></label>
-              <input type="password" id="confirmPassword" name="confirmPassword" class="form-control border" autocomplete="off">
-              <small class="form-text text-danger feedback"></small>
-            </div>
-            <div class="custom-control custom-switch mb-3">
-              <input type="checkbox" class="custom-control-input" id="showPassword" name="showPassword">
-              <label class="custom-control-label" for="showPassword">Show password</label>
-            </div>
-            <h2>Upload Credentials and Work History</h2>
-            <button type="submit" class="btn btn-outline-dark" name="btn" disabled>Register</button>
             <div class="container">
-              <label for="et_pb_contact_brand_file_request_0" class="et_pb_contact_form_label">Enter</label>
+              <label for="et_pb_contact_brand_file_request_0" class="et_pb_contact_form_label">Upload Credentials and Work History<br></label>
               <input type="file" id="et_pb_contact_brand_file_request_0" class="file-upload">
+            </div>
+            <div class="container">
+            <button type="submit" class="btn btn-outline-dark" name="btn" disabled>Register</button>
             </div>
           </form>
         </div>
@@ -59,4 +56,3 @@
     </div>
   </div>
 </div>
-    
