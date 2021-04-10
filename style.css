@@ -8,6 +8,13 @@ $dark-pink: #f9c4d2;
 $pink-border: #b18597;
 $pink-shadow: #ffe3e2;
 
+* {
+  box-sizing: border-box;
+  &::before, &::after {
+    box-sizing: border-box;
+  }
+}
+
 body {
   font-family: 'Rubik', sans-serif;
   font-size: 1rem;
