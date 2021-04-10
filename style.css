@@ -8,13 +8,6 @@ $dark-pink: #f9c4d2;
 $pink-border: #b18597;
 $pink-shadow: #ffe3e2;
 
-* {
-  box-sizing: border-box;
-  &::before, &::after {
-    box-sizing: border-box;
-  }
-}
-
 body {
   font-family: 'Rubik', sans-serif;
   font-size: 1rem;
@@ -35,6 +28,23 @@ body {
   padding: 1em;
   overflow-y: scroll;
   text-align: left;
+}
+
+button {
+	margin: 40px;
+	height: 48px;
+	padding: 0 24px;
+	cursor: pointer;;
+	border: solid 1px #000;
+	border-radius: 8px;
+}
+
+button:hover {
+	opacity: 0.7;
+}
+
+button:focus {
+	outline: 0;
 }
 
 a {
